@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>CORS Proxy サンプル</title>
+</head>
+<body>
+<h2>CORS プロキシを使った外部サイト表示</h2>
+
+<div id="site-content">読み込み中...</div>
+
+<script>
+  // Renderにデプロイ後はURLを自分の公開URLに置き換える
+  const proxyBase = 'https://<あなたの-render-URL>/proxy';
+
+  fetch(`${proxyBase}?url=https://bazaartracker.com`)
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('site-content').innerHTML = html;
+    })
+    .catch(err => console.error('取得エラー:', err));
+</script>
+</body>
+</html>
